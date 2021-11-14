@@ -21,8 +21,10 @@ class Home extends CI_Controller {
 	{
 		// $this->load->view('template/sidebar');
 		$data['user'] = $this->db->get_where('user',['email'=>$this->session->userdata('email')])->row_array();
-		$data['nama'] = $data['user']['nama'];
-		// print_r($data['nama']);die();
+		// $data['nama'] = $data['user']['nama'];
+			$data['summary']= $this->M_anggota->summary();
+			// $data['anggota'] = $data['summary']->anggota
+		// print_r($data['summary']->anggota);die();
 		$this->load->view('v_perpus/index',$data);
 	}
 

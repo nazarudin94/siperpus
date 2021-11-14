@@ -24,6 +24,16 @@ class M_anggota extends CI_Model {
 
 	}
 
+    function summary (){
+$sql = "select count(*) as anggota from tbl_login tl ";
+ $query = $this->db->query($sql);
+// print_r($query->row());die('dsa');
+    // $query = $this->db->get('tbl_login');
+    return $query->row();
+  
+
+  }
+
 	public function buat_kode($table_name,$kodeawal,$idkode,$orderbylimit)
   {
       $query = $this->db->query("select * from $table_name $orderbylimit"); // cek dulu apakah ada sudah ada kode di tabel.
