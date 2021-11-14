@@ -89,9 +89,8 @@ class Home extends CI_Controller {
 			</div></div>');
 			redirect(base_url('home/tambah')); 
 		}else{
-    	// echo "<pre>";print_r($_POST);die();
             // setting konfigurasi upload
-            die();
+            // die();
             $nmfile = "user_".time();
             $config['upload_path'] = './assets_style/image/';
             $config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -102,6 +101,7 @@ class Home extends CI_Controller {
             $this->upload->do_upload('gambar');
             $result1 = $this->upload->data();
             $result = array('gambar'=>$result1);
+    	// echo "<pre>";print_r($result1);die();
             $data1 = array('upload_data' => $this->upload->data());
             $data = array(
 				'anggota_id' => $id,
@@ -124,7 +124,7 @@ class Home extends CI_Controller {
             $this->session->set_flashdata('pesan','<div id="notifikasi"><div class="alert alert-success">
             <p> Daftar User telah berhasil !</p>
             </div></div>');
-			redirect(base_url('home/tambah'));
+			redirect(base_url('home/anggota'));
 		}    
       
     }

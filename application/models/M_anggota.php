@@ -18,7 +18,7 @@ class M_anggota extends CI_Model {
 
 	function getanggota (){
 
-		$query = $this->db->get('anggota');
+		$query = $this->db->get('tbl_login');
 		return $query->result_array();
 	
 
@@ -31,15 +31,18 @@ class M_anggota extends CI_Model {
 		  if($query->num_rows() > 0){
         //jika kode ternyata sudah ada.
         $hasil = $query->row();
+        // print_r($hasil);die();
         $kd = $hasil->$idkode;
         $cd = $kd;
         $nomor = $query->num_rows();
         $kode = $cd + 1;
         $kodejadi = $kodeawal."00".$kode;    // hasilnya CUS-0001 dst.
+        // print_r($kodejadi);die('1');
         $kdj = $kodejadi;
 		  }else {
         //jika kode belum ada
         $kode = 0+1;
+        // print_r($_POST);die();
         $kodejadi = $kodeawal."00".$kode;    // hasilnya CUS-0001 dst.
         $kdj = $kodejadi;
       }

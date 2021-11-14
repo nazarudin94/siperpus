@@ -73,8 +73,8 @@
                                         <th>Foto</th>
                                         <th>Nama</th>
                                         <th>NIS</th>
-                                        <th>Kelas</th>
                                         <th>Status Anggota</th>
+                                        <!-- <th>Status Anggota</th> -->
                                         <th>JenKel</th>
                                         <th>Action</th>
                                     </tr>
@@ -83,13 +83,21 @@
                                     <?php foreach ($anggota as $key => $val): 
                                      ?>
                                     <tr>
-                                        <td><?= $val['id_anggota'] ?></td>
-                                        <td>foto</td>
-                                        <td><?= $val['nis'] ?></td>
-                                        <td><?= $val['nm_anggota'] ?></td>
-                                        <td><?= $val['kelas'] ?></td>
-                                        <td><?= $val['status_anggota'] ?></td>
-                                        <td><?= $val['alamat'] ?></td>
+                                        <td><?= $val['anggota_id'] ?></td>
+                                        <td>  <center>
+                                        <?php if(!empty($val['foto'] !== "-")){?>
+                                        <img src="<?php echo base_url();?>assets_style/image/<?php echo $val['foto'];?>" alt="#" 
+                                        class="img-responsive" style="height:auto;width:100px;"/>
+                                        <?php }else{?>
+                                            <!--<img src="" alt="#" class="user-image" style="border:2px solid #fff;"/>-->
+                                            <i class="fa fa-user fa-3x" style="color:#333;"></i>
+                                        <?php }?>
+                                    </center></td>
+                                        <td><?= $val['user'] ?></td>
+                                        <td><?= $val['nama'] ?></td>
+                                        <td><?= $val['level'] ?></td>
+                                        <!-- <td><?= $val['status_anggota'] ?></td> -->
+                                        <td><?= $val['jenkel'] ?></td>
                                         <td>  <a href="#"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
                                     <a href="#" onclick="return confirm('Anda yakin user akan dihapus ?');">
                                     <button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
