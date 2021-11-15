@@ -18,14 +18,21 @@ class M_anggota extends CI_Model {
 
 	function getanggota (){
 
-		$query = $this->db->get('tbl_login');
+		$query = $this->db->get('user');
 		return $query->result_array();
 	
 
 	}
+     function update_table($table_name,$where,$id,$data)
+   {
+    // echo"<pre>";print_r($id);die('sda');
+     $this->db->where($where,$id);
+     $update = $this->db->update($table_name,$data);
+     return $update;
+   }
 
     function summary (){
-$sql = "select count(*) as anggota from tbl_login tl ";
+$sql = "select count(*) as anggota from user tl ";
  $query = $this->db->query($sql);
 // print_r($query->row());die('dsa');
     // $query = $this->db->get('tbl_login');
@@ -41,12 +48,12 @@ $sql = "select count(*) as anggota from tbl_login tl ";
 		  if($query->num_rows() > 0){
         //jika kode ternyata sudah ada.
         $hasil = $query->row();
-        // print_r($hasil);die();
         $kd = $hasil->$idkode;
         $cd = $kd;
         $nomor = $query->num_rows();
         $kode = $cd + 1;
         $kodejadi = $kodeawal."00".$kode;    // hasilnya CUS-0001 dst.
+        // print_r($kodejadi);die();
         // print_r($kodejadi);die('1');
         $kdj = $kodejadi;
 		  }else {
@@ -78,5 +85,20 @@ $sql = "select count(*) as anggota from tbl_login tl ";
       }
 		  return $kdj;
   }
+
+     function get_tableid_edit($table_name,$where,$id)
+   {
+     $this->db->where($where,$id);
+     $edit = $this->db->get($table_name);
+     return $edit->row();
+   }
+
+      function delete_table($table_name,$where,$id)
+   {
+     $this->db->where($where,$id);
+     $hapus = $this->db->delete($table_name);
+     return $hapus;
+   }
+
 
 }

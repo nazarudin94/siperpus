@@ -56,79 +56,76 @@
                                 <div class="card shadow mb-4">
                                     <!-- /.box-header -->
                                     <div class="card-body"> 
-                                        <form  action="<?php echo base_url('home/tambah');?>" method="POST" enctype="multipart/form-data">
+
+                                        <form action="<?php echo base_url('home/upd');?>" method="POST" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Nama Pengguna</label>
-                                                        <input type="text" id="nama" class="form-control" name="nama"  placeholder="Nama Pengguna" value="<?=set_value('nama');?>">
-                                                         <?= form_error('nama','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="text" class="form-control" value="<?= $user->nama;?>" name="nama" required="required" placeholder="Nama Pengguna">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Tempat Lahir</label>
-                                                        <input type="text" class="form-control" name="lahir" id="lahir"  placeholder="Contoh : Bekasi" value="<?=set_value('lahir');?>">
-                                                          <?= form_error('lahir','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="text" class="form-control" name="lahir" value="<?= $user->tempat_lahir;?>" required="required" placeholder="Contoh : Bekasi">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Tanggal Lahir</label>
-                                                        <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir"  placeholder="Contoh : 1999-05-18" value="<?=set_value('tgl_lahir');?>">
-                                                        <?= form_error('tgl_lahir','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="date" class="form-control" name="tgl_lahir" value="<?= $user->tgl_lahir;?>" required="required" placeholder="Contoh : 1999-05-18">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Username</label>
-                                                        <input type="text" class="form-control" id="user" name="user"  placeholder="Username" value="<?=set_value('user');?>" >
-                                                          <?= form_error('user','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="text" class="form-control" readonly value="<?= $user->user;?>"  name="user" required="required" placeholder="Username">
                                                     </div>
-                                                    <div class="form-group ">
-                                                     <label>Password</label>
-                                                            <input type="password" class="form-control" name="password" 
-                                                            id="password" placeholder="Password">
-                                                  <?= form_error('password','<small class="text-danger pl-3">','</small>');?>
-
+                                                    <div class="form-group">
+                                                        <label>Password (opsional)</label>
+                                                        <input type="password" class="form-control" name="password" placeholder="Isi Password Jika di Perlukan Ganti">
                                                     </div>
-                                                    <div class="form-group ">
+                                                    <div class="form-group">
                                                         <label>Level</label>
-                                                        <select name="level" class="form-control" >
-                                                            <option>Petugas</option>
-                                                            <option>Anggota</option>
+                                                        <select name="level" class="form-control" required="required">
+                                                            <?php if($this->session->userdata('level') == 'Petugas'){?>
+                                                                <option <?php if($user->level == 'Petugas'){ echo 'selected';}?>>Petugas</option>
+                                                                <option <?php if($user->level == 'Anggota'){ echo 'selected';}?>>Anggota</option>
+                                                            <?php }elseif($this->session->userdata('level') == 'Anggota'){?>
+                                                                <option <?php if($user->level == 'Anggota'){ echo 'selected';}?>>Anggota</option>
+                                                            <?php }?>
                                                         </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Jenis Kelamin</label>
+                                                        <br/>
+                                                        <input type="radio" name="jenkel" <?php if($user->jenkel == 'Laki-Laki'){ echo 'checked';}?> value="Laki-Laki" required="required"> Laki-Laki
+                                                        <br/>
+                                                        <input type="radio" name="jenkel" <?php if($user->jenkel == 'Perempuan'){ echo 'checked';}?> value="Perempuan" required="required"> Perempuan
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Jenis Kelamin</label>
-                                                        <br/>
-                                                        <input type="radio" name="jenkel" value="Laki-Laki" > Laki-Laki
-                                                        <br/>
-                                                        <input type="radio" name="jenkel" value="Perempuan" > Perempuan
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label>Telepon</label>
-                                                        <input id="uintTextBox" class="form-control" name="telepon" id="telepon"  placeholder="Contoh : 089618173609" value="<?=set_value('telepon');?>">
-                                                         <?= form_error('telepon','<small class="text-danger pl-3">','</small>');?>
+                                                        <input id="uintTextBox" class="form-control" value="<?= $user->telepon;?>" name="telepon" required="required" placeholder="Contoh : 089618173609">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>E-mail</label>
-                                                        <input type="email" class="form-control" name="email" id="email"  placeholder="Contoh : fauzan1892@codekop.com" value="<?=set_value('email');?>">
-                                                         <?= form_error('email','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="email"  value="<?= $user->email;?>" readonly class="form-control" name="email" required="required" placeholder="Contoh : fauzan1892@codekop.com">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Pas Foto</label>
-                                                        <input type="file" accept="image/*" name="gambar"  id="gambar" value="<?=set_value('gambar');?>">
-                                                           <?= form_error('gambar','<small class="text-danger pl-3">','</small>');?>
+                                                        <input type="file" accept="image/*" name="gambar">
+
+                                                        <br/>
+                                                        <img src="<?= base_url('assets_style/image/'.$user->foto);?>" class="img-fluid" alt="Responsive image" style="height: auto;width: 129px;">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Alamat</label>
-                                                        <textarea class="form-control" name="alamat" id="alamat" value="<?=set_value('alamat');?>"></textarea>
-                                                           <?= form_error('alamat','<small class="text-danger pl-3">','</small>');?>
-
+                                                        <textarea class="form-control" name="alamat"  required="required"><?= $user->alamat;?></textarea>
+                                                        <input type="hidden" class="form-control" value="<?= $user->id;?>" name="id">
+                                                        <input type="hidden" class="form-control" value="<?= $user->foto;?>" name="foto">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="pull-right">
-                                                <button type="submit" class="btn btn-primary btn-md">Submit</button> 
+                                                <button type="submit" class="btn btn-primary btn-md">Edit Data</button> 
                                             </form>
-                                            <a href="<?= base_url('user');?>" class="btn btn-danger btn-md">Kembali</a>
                                         </div>
                                     </div>
                                 </div>

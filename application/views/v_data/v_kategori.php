@@ -132,7 +132,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
+                                <?php $no=1;foreach($kategori as $isi){?>
+                                    <tr>
+                                        <td><?= $no;?></td>
+                                        <td><?= $isi['nama_kategori'];?></td>
+                                        <td style="width:20%;">
+                                            <a href="<?= base_url('data/kategori?id='.$isi['id_kategori']);?>"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
+                                            <a href="<?= base_url('data/katproses?kat_id='.$isi['id_kategori']);?>" onclick="return confirm('Anda yakin Kategori ini akan dihapus ?');">
+                                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+                                        </td>
+                                    </tr>
+                                <?php $no++;}?>
 
                                 </tbody>
                             </table>

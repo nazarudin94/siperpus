@@ -235,6 +235,8 @@ if ( ! function_exists('password_verify'))
 	 */
 	function password_verify($password, $hash)
 	{
+		// die();
+
 		if (strlen($hash) !== 60 OR strlen($password = crypt($password, $hash)) !== 60)
 		{
 			return FALSE;

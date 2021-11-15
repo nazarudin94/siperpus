@@ -46,112 +46,118 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                  <!--   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Anggota</h1>
-                    </div> -->
+                    <div class="d-sm-flex align-items-center justify-content-between ">
+                        <h5 class="text-gray-800">Data Anggota</h5>
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="<?= base_url('Home/index')?>">DASHBOARD</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Data Anggota</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <?php if(!empty($this->session->flashdata())){ echo $this->session->flashdata('pesan');}?>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
 
                         <div class="card-header py-3">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Anggota</h6>
 
-                                </div>
-                                <div class="col-md-6 d-flex justify-content-end">
-                                   <a href="<?= base_url('home/tambah') ?>" class="btn btn-primary" >Tambah Anggota</a>
+                                <div class="col-md-12 d-flex justify-content-end">
+                                 <a href="<?= base_url('home/tambah') ?>" class="btn btn-primary" >Tambah Anggota</a>
 
-                               </div>
-                           </div>
-                       </div>
-                       <div class="card-body">
+                             </div>
+                         </div>
+                     </div>
+                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID Anggota</th>
                                         <th>Foto</th>
                                         <th>Nama</th>
-                                        <th>NIS</th>
-                                        <th>Status Anggota</th>
-                                        <!-- <th>Status Anggota</th> -->
+                                        <!-- <th>NIS</th> -->
+                                        <th>Status <br>Anggota</th>
+                                        <th>Telepon</th>
                                         <th>JenKel</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($anggota as $key => $val): 
-                                     ?>
-                                    <tr>
+                                       ?>
+                                       <tr>
                                         <td><?= $val['anggota_id'] ?></td>
                                         <td>  <center>
-                                        <?php if(!empty($val['foto'] !== "-")){?>
-                                        <img src="<?php echo base_url();?>assets_style/image/<?php echo $val['foto'];?>" alt="#" 
-                                        class="img-responsive" style="height:auto;width:100px;"/>
-                                        <?php }else{?>
-                                            <!--<img src="" alt="#" class="user-image" style="border:2px solid #fff;"/>-->
-                                            <i class="fa fa-user fa-3x" style="color:#333;"></i>
-                                        <?php }?>
-                                    </center></td>
-                                        <td><?= $val['user'] ?></td>
+                                            <?php if(!empty($val['foto'] !== "-")){?>
+                                                <img src="<?php echo base_url();?>assets_style/image/<?php echo $val['foto'];?>" alt="#" 
+                                                class="img-responsive" style="height:auto;width:100px;"/>
+                                            <?php }else{?>
+                                                <!--<img src="" alt="#" class="user-image" style="border:2px solid #fff;"/>-->
+                                                <i class="fa fa-user fa-3x" style="color:#333;"></i>
+                                            <?php }?>
+                                        </center></td>
                                         <td><?= $val['nama'] ?></td>
+                                        <!-- <td><?= $val['nama'] ?></td> -->
                                         <td><?= $val['level'] ?></td>
-                                        <!-- <td><?= $val['status_anggota'] ?></td> -->
+                                        <td><?= $val['telepon'] ?></td>
                                         <td><?= $val['jenkel'] ?></td>
-                                        <td>  <a href="#"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
-                                    <a href="#" onclick="return confirm('Anda yakin user akan dihapus ?');">
-                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
-                               <!--      <a href="#" target="_blank"><button class="btn btn-primary">
-                                        <i class="fa fa-print"></i> Cetak Kartu</button></a> -->
-                                    </td>
+                                        <td style="width:20%;">
+                                            <a href="<?= base_url('home/edit/'.$val['id']);?>"><button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                                            <a href="<?= base_url('home/del/'.$val['id']);?>" onclick="return confirm('Anda yakin user akan dihapus ?');">
+                                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                                <a href="<?= base_url('home/detail/'.$val['id']);?>" target="_blank"><button class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-print"></i> Cetak Kartu</button></a>
+                                                </td>
 
-                                    </tr>
-                                       <?php endforeach; ?> 
+                                            </tr>
+                                        <?php endforeach; ?> 
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- /.container-fluid -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <?php $this->load->view('template/footer'); ?>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <?php $this->load->view('template/footer'); ?>
-        <!-- End of Footer -->
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 
@@ -220,18 +226,23 @@ aria-hidden="true">
 <script src="<?=base_url();?>assets/js/sb-admin-2.min.js"></script>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        setTimeout(function(){
+            document.getElementById("notifikasi").style.display = "none";
+        }, 1000);
+    })
     function Add(){
-        // alert('fs');
-        var xhr = new XMLHttpRequest();
-        var url = "<?= base_url('home/insertdata') ?>";
-        let myForm = document.getElementById('formdata');
-        let formData = new FormData(myForm);
-        console.log(formData);
-        xhr.open("POST", url, true);
-        xhr.send(formData);
-        return false;
+// alert('fs');
+var xhr = new XMLHttpRequest();
+var url = "<?= base_url('home/insertdata') ?>";
+let myForm = document.getElementById('formdata');
+let formData = new FormData(myForm);
+console.log(formData);
+xhr.open("POST", url, true);
+xhr.send(formData);
+return false;
 
-    }
+}
 
 </script>
 
